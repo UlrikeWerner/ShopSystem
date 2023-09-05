@@ -38,6 +38,11 @@ public class ShopService {
         productRepo.addProductToList(product);
     }
 
+    public void deleteProductFromProductRepo(Product product){
+        productRepo.deleteProductFromList(product);
+        orderListRepo.deleteOrderFromTheOrderList(new Order(product));
+    }
+
     public void totalBill(){
         System.out.println("total Price: " + orderListRepo.getTotalPrice());
     }

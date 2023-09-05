@@ -28,6 +28,11 @@ public class Main {
         System.out.println(orderListRepo);
         shopService.createNewOrder(new Order(p1));
         shopService.createNewOrder(new Order(p3));
+        System.out.println("-------------");
+        System.out.println(orderListRepo);
+        shopService.totalBill();
+        System.out.println("---------------");
+        shopService.deleteProductFromProductRepo(p1);
         System.out.println(orderListRepo);
         shopService.totalBill();
     }
