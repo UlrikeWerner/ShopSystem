@@ -7,10 +7,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class OrderListRepo {
-    private final UUID orderNumber;
+    private UUID orderNumber;
     List<Order> orderList;
 
     //Constructor
+    public OrderListRepo(){}
     public OrderListRepo(UUID orderNumber, List<Order> orderList) {
         this.orderNumber = orderNumber;
         this.orderList = orderList;
@@ -35,6 +36,13 @@ public class OrderListRepo {
             return;
         }
         orderList.remove(order);
+    }
+
+    public List<Order> findOrderList(UUID orderNumber){
+       if(this.orderNumber == orderNumber){
+           return orderList;
+       }
+       return null;
     }
 
     //generated methods
