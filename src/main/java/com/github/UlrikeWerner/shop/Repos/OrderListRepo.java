@@ -2,39 +2,60 @@ package com.github.UlrikeWerner.shop.Repos;
 
 import com.github.UlrikeWerner.shop.Entities.Order;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 public class OrderListRepo {
     private UUID orderNumber;
-    List<Order> orderList;
+    private List<Order> orderList;
+    private BigDecimal totalPrice;
 
     //Constructor
-    public OrderListRepo(){}
-    public OrderListRepo(UUID orderNumber, List<Order> orderList) {
-        this.orderNumber = orderNumber;
-        this.orderList = orderList;
+    public OrderListRepo() {
+        this.orderNumber = UUID.randomUUID();
+        this.orderList = new ArrayList<>();
+        this.totalPrice = new BigDecimal("0.00");
     }
 
-    //Getter
+    //Getter & Setter
     public UUID getOrderNumber() {
         return orderNumber;
+    }
+
+    public void setOrderNumber(UUID orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public List<Order> getOrderList() {
         return orderList;
     }
 
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     //methods
     public void addOrderToOrderList(Order order){
         orderList.add(order);
+        totalPrice = totalPrice.add(order.product().price());
     }
     public void deleteOrderFromTheOrderList(Order order){
         if(!orderList.contains(order)){
             System.out.println("Das Produkt ist nicht auf deiner Bestellungsliste!");
             return;
         }
+        totalPrice = totalPrice.subtract(order.product().price());
         orderList.remove(order);
     }
 
